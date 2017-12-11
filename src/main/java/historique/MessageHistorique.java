@@ -1,13 +1,13 @@
 package historique;
 
-;
+
 import main.ChatManager;
 import model.UsersDistants;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.*;
-import java.nio.Buffer;
+
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
@@ -22,7 +22,7 @@ public class MessageHistorique {
     private final File repertoire;
     public final UsersDistants userDistant;
     private static HashMap<String, File> listeFichiers;
-    private static final String PATH = "D:\\Users\\pierr_000\\Documents\\COO\\Clavardage-System\\ChatManager\\src\\main\\HistoriqueDossier";
+    private static final String PATH = "D:\\Users\\pierr_000\\Documents\\COO\\Clavardage_System_avec_historique\\ChatManager\\src\\main\\HistoriqueDossier";
     private final ChatManager chatManager;
     private File fichierSessionHistorique;
     private String fichierTrouver;
@@ -37,7 +37,7 @@ public class MessageHistorique {
         fichierSessionHistorique = null;
     }
     public String toString() {
-        return PATH+"\\"+chatManager.userLogin()+"_"+userDistant.getLogin()+"-"+chatManager.userPseudo()+"_"+userDistant.getPseudoActuel()+".txt";
+        return PATH+"\\"+chatManager.userLogin()+"_"+userDistant.getLogin()+".txt";
     }
 
     public void creerFichier() throws IOException, NotFileException {
@@ -48,20 +48,17 @@ public class MessageHistorique {
             }
         }
     }
-  /*  public String[] remplirBufferecriture(){
 
-    }
-    public void ecriturefichier(MomentEcriture moment, Buffer) throws IOException {
-        FileWriter write = new FileWriter(fichierSessionHistorique);
-        write.;
-        String message_prepare = moment + ":" + LocalDateTime.now() + ":" + message;
-
+    public void ecriturefichier(MomentEcriture moment, String message) throws IOException {
+        FileWriter write = new FileWriter(fichierSessionHistorique, true);
+        String message_prepare =  moment + ":" + LocalDateTime.now() + ":" + message ;
         write.write(message_prepare);
+        write.append("\n");
         write.close();
     }
-*/
+
     private boolean checkNomFichier(String nomfichier) {
-        String filtre = "[a-zA-Z0-9]+_[a-zA-Z0-9]+-[a-zA-Z0-9]+_[a-zA-Z0-9]+\\.[a-zA-Z]{3}";
+        String filtre = "[a-zA-Z0-9]+_[a-zA-Z0-9]+\\.[a-zA-Z]{3}";
 
         Pattern p = Pattern.compile(filtre);
 
@@ -96,6 +93,20 @@ public class MessageHistorique {
 
     public File findfichier(String nomfichier){
         return listeFichiers.get(nomfichier);
+    }
+    public void lirefichier(String nomfichier) throws IOException, NotFileException {
+        File fichier = new File(nomfichier);
+        if(fichier.exists()) {
+            FileReader file = new FileReader(fichier.getName());
+            BufferedReader reader = new BufferedReader(file);
+            String line = null;
+            while (( line = reader.readLine() ) != null) {
+                line = reader.readLine();
+            }
+            reader.close();
+        }else{
+            creerFichier();
+        }
     }
 
 }

@@ -27,7 +27,7 @@ public class Must_Liste_Fichiers_Du_Dossier {
     public void Affichage_Liste_Fichiers_Dossier() {
         ChatManager theCM = new ChatManager();
         UsersDistants user = new UsersDistants("toto", "localhost", "titi", 1045);
-        String fichierATrouver = "vince_toto-null_titi.txt";
+        String fichierATrouver = "vince_toto.txt";
         String message = "Salut ça va !!!!!";
         monMessageHistorique = new MessageHistorique(user, theCM);
 
@@ -42,7 +42,13 @@ public class Must_Liste_Fichiers_Du_Dossier {
             } else {
                 System.out.println("Fichier non trouvé");
             }
-        } catch (NotDirectoryException | NotFileException | CasseNomFichierException | IOException e) {
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NotFileException e) {
+            e.printStackTrace();
+        } catch (NotDirectoryException e) {
+            e.printStackTrace();
+        } catch (CasseNomFichierException e) {
             e.printStackTrace();
         }
 
