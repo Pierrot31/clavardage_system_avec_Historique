@@ -35,6 +35,7 @@ public class Must_Liste_Fichiers_Du_Dossier {
             monMessageHistorique.creerFichier();
             monMessageHistorique.listeFichiersDossier();
             monMessageHistorique.affichageListeFichierDuDossier();
+            monMessageHistorique.lirefichier(fichierATrouver);
             File fichierTrouver = monMessageHistorique.findfichier(fichierATrouver);
             if (fichierTrouver != null) {
                 System.out.println("Fichier trouvé : " + fichierTrouver.toString());
@@ -42,6 +43,7 @@ public class Must_Liste_Fichiers_Du_Dossier {
             } else {
                 System.out.println("Fichier non trouvé");
             }
+            monMessageHistorique.lirefichier(fichierTrouver.getAbsolutePath());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (NotFileException e) {

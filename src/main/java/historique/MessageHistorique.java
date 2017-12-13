@@ -21,12 +21,13 @@ import java.util.regex.*;
 public class MessageHistorique {
     private final File repertoire;
     public final UsersDistants userDistant;
+
     private static HashMap<String, File> listeFichiers;
-    private static final String PATH = "D:\\Users\\pierr_000\\Documents\\COO\\Clavardage_System_avec_historique\\ChatManager\\src\\main\\HistoriqueDossier";
+    private static final String PATH = ".\\src\\main\\HistoriqueDossier\\";
     private final ChatManager chatManager;
     private File fichierSessionHistorique;
     private String fichierTrouver;
-    //private List<String[]> BuffermessageAecrit;
+
 
     public MessageHistorique(UsersDistants user, ChatManager theCM) {
         repertoire = new File(PATH);
@@ -34,15 +35,16 @@ public class MessageHistorique {
         listeFichiers = new HashMap<String, File>();
         userDistant = user;
         fichierTrouver=null;
-        fichierSessionHistorique = null;
+
     }
     public String toString() {
-        return PATH+"\\"+chatManager.userLogin()+"_"+userDistant.getLogin()+".txt";
+        return PATH+chatManager.userLogin()+"_"+userDistant.getLogin()+".txt";
     }
 
     public void creerFichier() throws IOException, NotFileException {
         fichierSessionHistorique = new File(toString());
-        if(!fichierSessionHistorique.exists()){
+        System.out.println("création fichierSessionHistorique");
+                if(!fichierSessionHistorique.exists()){
             if (!fichierSessionHistorique.createNewFile()) {
                 throw new NotFileException("Impossible de créer  le fichier");
             }
@@ -94,18 +96,21 @@ public class MessageHistorique {
     public File findfichier(String nomfichier){
         return listeFichiers.get(nomfichier);
     }
-    public void lirefichier(String nomfichier) throws IOException, NotFileException {
-        File fichier = new File(nomfichier);
+    public void lirefichier(String nomFichier) throws IOException, NotFileException {
+        File fichier = fichierSessionHistorique;
         if(fichier.exists()) {
-            FileReader file = new FileReader(fichier.getName());
+            System.out.println(nomFichier);
+            FileReader file = new FileReader(nomFichier);
             BufferedReader reader = new BufferedReader(file);
             String line = null;
             while (( line = reader.readLine() ) != null) {
                 line = reader.readLine();
+                System.out.println(line);
             }
             reader.close();
         }else{
             creerFichier();
+            System.out.println("tata");
         }
     }
 
