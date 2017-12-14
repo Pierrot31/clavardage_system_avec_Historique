@@ -35,7 +35,6 @@ public class Must_Liste_Fichiers_Du_Dossier {
             monMessageHistorique.creerFichier();
             monMessageHistorique.listeFichiersDossier();
             monMessageHistorique.affichageListeFichierDuDossier();
-            monMessageHistorique.lirefichier(fichierATrouver);
             File fichierTrouver = monMessageHistorique.findfichier(fichierATrouver);
             if (fichierTrouver != null) {
                 System.out.println("Fichier trouvé : " + fichierTrouver.toString());

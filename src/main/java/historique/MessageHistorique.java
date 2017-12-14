@@ -102,9 +102,8 @@ public class MessageHistorique {
             System.out.println(nomFichier);
             FileReader file = new FileReader(nomFichier);
             BufferedReader reader = new BufferedReader(file);
-            String line = null;
+            String line;
             while (( line = reader.readLine() ) != null) {
-                line = reader.readLine();
                 System.out.println(line);
             }
             reader.close();
